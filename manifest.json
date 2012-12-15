@@ -1,0 +1,52 @@
+{
+    "name": "EMSCharts Filler",
+    "version": "0.1.0",
+    "description": "Autofills EMSCharts with defaults.",
+    "manifest_version" : 2,
+    "background": {
+        "persistent": false,
+        "scripts": ["bg.js"]
+    },
+    "icons" : {
+        "16" : "icon.png",
+        "128" : "icon_128.ico"
+    },
+    "options_page":"options.html",
+    "permissions": [
+    "https://*.emscharts.com/pr/", 
+    "storage"
+    ],
+    "web_accessible_resources":["inject.js"],
+    "content_scripts": [
+    {
+        "matches":["https://www.emscharts.com/pr/page2.cfm?*"],
+        "js":["jquery-1.8.3.min.js","page2.js"],
+        "run_at":"document_start"
+    },
+    {
+        "matches":["https://www.emscharts.com/pr/page3.cfm?*"],
+        "js":["jquery-1.8.3.min.js","page3.js"],
+        "run_at":"document_start"
+    },
+    {
+        "matches":["https://www.emscharts.com/pr/page4.cfm?*"],
+        "js":["jquery-1.8.3.min.js","page4.js"],
+        "run_at":"document_start"
+    },
+    {
+        "matches":["https://www.emscharts.com/pr/page5.cfm?*"],
+        "js":["jquery-1.8.3.min.js","page5.js"],
+        "run_at":"document_start"
+    },
+    {
+        "matches":["https://www.emscharts.com/pr/page8.cfm?*"],
+        "js":["jquery-1.8.3.min.js","page8.js"],
+        "run_at":"document_start"
+    }
+
+    ],
+    "browser_action": {
+        "default_title": "EMSCharts Filler",
+        "default_popup": "popup.html"
+    }
+}

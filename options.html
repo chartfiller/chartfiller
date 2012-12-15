@@ -1,0 +1,504 @@
+<html>
+    <head>
+        <title>Chartfiller Defaults</title>
+        <script src="jquery-1.8.3.min.js"></script>
+        <script src="jquery-ui-1.9.2.custom.min.js"></script>
+        <script src="accordian.js"></script>
+        <link rel="stylesheet" type="text/css" href="jquery-ui-1.9.2.custom.min.css">
+        <style type="text/css">
+            .section {
+                width:480px;
+                border:1px solid #000;
+                overflow:auto;
+                margin:10px;
+                padding:5px;
+                float:left;
+            }
+            .section-row {
+                clear:both;
+                overflow:auto;
+                margin:5px auto;
+            }
+            .l {
+                width:150px;
+                padding:5px;
+                margin:5px;
+                text-align:right;
+            }
+            .r {
+                margin:5px;
+                text-align:left;
+            }
+            .clear {
+                clear:both;
+
+            }
+            .submit-row {
+                width:480px;
+                text-align:center;
+                margin:0 auto;
+            }
+            input[type=text] {
+                width:300px;
+                border:1px solid #000;
+            }
+            textarea {
+                width:300px;
+                height:75px;
+                border:1px solid #000;
+            }
+            #status {
+                background-color:yellow;
+                color:red;
+                font-weight:bold;
+                margin:5px auto;
+                text-align:center;
+                font-variant:small-caps;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="accordion">
+
+            <h3>Page 2 Settings</h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="l">
+                            Chief Complaint
+                        </td>
+                        <td class="r">
+                            <textarea id="pg2_chief_complaint"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            ALS Assessment
+                        </td>
+                        <td class="r">
+                            <select id="pg2_als_assessment">
+                                <option value="1">Not Completed</option>
+                                <option value="2">Completed for Suspected Illness</option>
+                                <option value="3">Completed for Rule-Out Diagnosis</option>
+                                <option value="0" disabled="disabled">LOL "ALS Assessment"</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Duration
+                        </td>
+                        <td class="r">
+                            <input type="number" max="99" min="0" step="1" id="pg2_duration">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Duration Units
+                        </td>
+                        <td class="r">
+                            <select id="pg2_duration_units">
+                                <option value="1235">Seconds</option>
+                                <option value="1240">Minutes</option>
+                                <option value="1245">Hours</option>
+                                <option value="1250">Days</option>
+                                <option value="1255">Weeks</option>
+                                <option value="1260">Months</option>
+                                <option value="1265">Years</option>
+                                <option value="0" disabled="disabled">Ever since my accident back in '74...</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            HPI
+                        </td>
+                        <td class="r">
+                            <textarea id="pg2_hpi"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Scene Description
+                        </td>
+                        <td class="r">
+                            <textarea id="pg2_scene_description"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Patient Belongings
+                        </td>
+                        <td class="r">
+                            <textarea id="pg2_belongings"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            To ambulance via
+                        </td>
+                        <td class="r">
+                            <select id="pg2_to_truck">
+                                <option value="4880">Stretcher</option>
+                                <option value="4865">Assist/Walk</option>
+                                <option value="4885">Other</option>
+                                <option value="0" disabled="disabled">driveway, past three working vehicles</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Position in ambulance
+                        </td>
+                        <td class="r">
+                            <select id="pg2_position">
+                                <option value="4910">Semi-Fowlers</option>
+                                <option value="4895">Fowlers</option>
+                                <option value="4915">Sitting</option>
+                                <option value="4920">Supine</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            From ambulance via
+                        </td>
+                        <td class="r">
+                            <select id="pg2_from_truck">
+                                <option value="4930">Assist/Walk</option>
+                                <option value="4935">Stretcher</option>
+                                <option value="4951">Wheelchair</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <h3>Page 3 Settings</h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="l">
+                            Neuro comments
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg3_neuro_comments">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Stroke Scale
+                        </td>
+                        <td class="r">
+                            <select id="pg3_stroke_scale">
+                                <option value="-25">Not Applicable</option>
+                                <option value="3275">Cincinnati Negative</option>
+                                <option value="3280">Cincinnati Inconclusive</option>
+                                <option value="3285">Cincinnati Positive</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            GCS Eye
+                        </td>
+                        <td class="r">
+                            <select id="pg3_gcs_eye">
+                                <option value="4">4 - Spontaneous</option>
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            GCS Verbal
+                        </td>
+                        <td class="r">
+                            <select id="pg3_gcs_verbal">
+                                <option value="5">5 - Oriented</option>
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            GCS Motor
+                        </td>
+                        <td class="r">
+                            <select id="pg3_gcs_motor">
+                                <option value="6">6 - Obeys Command</option>
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <h3>Page 4 Settings</h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="l">
+                            Respiratory Comments
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg4_resp_comments">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="l">
+                            Cardiovascular Comments
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg4_cardiac_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Radial (Left)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_radial_l">
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Radial (Right)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_radial_r">
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Femoral (Left)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_fem_l">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Femoral (Right)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_fem_r">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Carotid (Left)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_carotid_l">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Carotid (Right)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_carotid_r">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Dorsalis (Left)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_dors_l">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Dorsalis (Right)
+                        </td>
+                        <td class="r">
+                            <select id="pg4_dors_r">
+                                <option value=""></option>
+                                <option value="1">Strong</option>
+                                <option value="22">Normal</option>
+                                <option value="4">Not Checked</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+
+            <h3>Page 5 Settings</h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="l">
+                            Head Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_head_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Neck Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_neck_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Chest Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_chest_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Abdomen (Appearance)
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ap_appearance">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Abdomen (Palpation)
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ap_palpation">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Abdomen (Bowel Sounds)
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ap_bowel_sounds">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Abdomen (Comments)
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ap_findings">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Pelvis Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_pelvis_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Back Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_back_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Extremity Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ex_comments">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Restraints
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ex_restraints">
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Skin Findings
+                        </td>
+                        <td class="r">
+                            <input type="text" id="pg5_ex_skin_findings">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <h3>Page 8 Settings</h3>
+            <div>
+                <table>
+                    <tr>
+                        <td class="l">
+                            "On Scene" Comment
+                        </td>
+                        <td class="r">
+                            <textarea id="pg8_at_ref"></textarea>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            "Transporting" Comment
+                        </td>
+                        <td class="r">
+                            <textarea id="pg8_lv_ref"></textarea>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            "At Hospital" Comment
+                        </td>
+                        <td class="r">
+                            <textarea id="pg8_at_rec"></textarea>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Canned Line 1
+                        </td>
+                        <td class="r">
+                            <textarea id="pg8_can_1"></textarea>
+                        </td>
+                    </tr><tr>
+                        <td class="l">
+                            Canned Line 2
+                        </td>
+                        <td class="r">
+                            <textarea id="pg8_can_2"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="status"></div>
+<div>
+<input id="syncme" name="syncme" type="checkbox" value="1"> Save to Chrome.storage.sync 
+(Your settings will transfer to all Chrome browsers where you are logged in)
+</div>
+        <div class="submit-row">
+            <button id="save">Save</button>
+        </div>
+        <script src="options.js"></script>
+    </body>
+</html>
