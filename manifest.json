@@ -1,6 +1,6 @@
 {
     "name": "EMSCharts Filler",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Autofills EMSCharts with defaults.",
     "manifest_version" : 2,
     "background": {
@@ -8,8 +8,8 @@
         "scripts": ["bg.js"]
     },
     "icons" : {
-        "16" : "icon.png",
-        "128" : "icon_128.ico"
+        "16" : "icon_16.png",
+        "128" : "icon_128.png"
     },
     "options_page":"options.html",
     "permissions": [

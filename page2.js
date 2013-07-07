@@ -16,18 +16,24 @@ $(document).ready(function() {
             var to_truck = response.to_truck;
             var from_truck = response.from_truck;
             var position = response.position;
-        
-            $('textarea[name=PRMAIN_cc]').text(chief_complaint);
+            var first_on_scene = response.first_on_scene;
+            var stretcher_purpose = response.stretcher_purpose;
+            
+            
             $('input[name=PRMAIN_ccduration]').val(cc_duration);
-            $('select[name=PRMAIN_als_assessment]').attr('value',als_assessment);
-            $('select[name=PRMAIN_ccdurunits]').attr('value',cc_duration_units);
+            $('input[name=stretcher_purpose_descr]').val(stretcher_purpose);
+                    
+            $('textarea[name=PRMAIN_cc]').text(chief_complaint);
             $('textarea[name=PRMAIN_hpi]').text(hpi);
             $('textarea[name=PRMAIN_belongings]').text(patient_belongings);
             $('textarea[name=scene_description]').text(scene_description);
 
-            $('select[name=pt_moved_via]').attr('value',to_truck);
-            $('select[name=pt_position]').attr('value',position);
-            $('select[name=pt_moved_from]').attr('value',from_truck);
+            $('select[name=PRMAIN_first_on_scene]').val(first_on_scene);
+            $('select[name=PRMAIN_als_assessment]').val(als_assessment);
+            $('select[name=PRMAIN_ccdurunits]').val(cc_duration_units);
+            $('select[name=pt_moved_via]').val(to_truck);
+            $('select[name=pt_position]').val(position);
+            $('select[name=pt_moved_from]').val(from_truck);
         });
     });
 });

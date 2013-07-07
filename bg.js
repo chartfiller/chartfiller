@@ -11,7 +11,9 @@ chrome.extension.onMessage.addListener(
                 patient_belongings : localStorage["pg2_belongings"],
                 to_truck : localStorage["pg2_to_truck"],
                 from_truck : localStorage["pg2_from_truck"],
-                position : localStorage["pg2_position"]
+                position : localStorage["pg2_position"],
+                first_on_scene : localStorage["pg2_first_on_scene"],
+                stretcher_purpose : localStorage["pg2_stretcher_purpose"]
             });
         else if(request.greeting == "pg3")
             sendResponse({
