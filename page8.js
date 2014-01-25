@@ -31,7 +31,7 @@ $(document).ready(function() {
             
             var at_ref_ex = "At Ref: ([0-2][0-9]:[0-5][0-9])";
             var regex1 = new RegExp(at_ref_ex);
-            var times = $('input[name=TMP_Page8]').next('div').html();
+            var times = $('input[name=pertneg_tmp_eventid]').next('div').html();
             var at_ref = regex1.exec(times);
             var at_ref = at_ref[1];
             
@@ -47,7 +47,7 @@ $(document).ready(function() {
             var lv_ref_comment = response.lv_ref_comment;
             var lv_ref_ex = "Lv Ref: ([0-2][0-9]:[0-5][0-9])";
             var regex2 = new RegExp(lv_ref_ex);
-            var times = $('input[name=TMP_Page8]').next('div').html();
+            var times = $('input[name=pertneg_tmp_eventid]').next('div').html();
             var lv_ref = regex2.exec(times);
             var lv_ref = lv_ref[1];
             
@@ -62,7 +62,7 @@ $(document).ready(function() {
             var at_rec_comment = response.at_rec_comment;
             var at_rec_ex = "At Rec: ([0-2][0-9]:[0-5][0-9])";
             var regex3 = new RegExp(at_rec_ex);
-            var times = $('input[name=TMP_Page8]').next('div').html();
+            var times = $('input[name=pertneg_tmp_eventid]').next('div').html();
             var at_rec = regex3.exec(times);
             var at_rec = at_rec[1];
 
