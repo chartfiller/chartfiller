@@ -1,5 +1,6 @@
 {
     "name": "EMSCharts Filler",
+    "short_name": "Chartfiller",
     "version": "0.1.2",
     "description": "Autofills EMSCharts with defaults.",
     "manifest_version" : 2,
