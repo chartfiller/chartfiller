@@ -81,15 +81,33 @@ function restore_options() {
 
     
     for (var i=0;i<txtInputs.length;i++) {
+    	if (localStorage[txtInputs[i]]=="undefined")
+    	{
+    	}
+    	else
+    	{
         document.getElementById(txtInputs[i]).value = localStorage[txtInputs[i]];
+        }
     }
     
     for (var i=0;i<txtAreas.length;i++) {
+    if (localStorage[txtAreas[i]]=="undefined")
+    	{
+    	}
+    	else
+    	{
         document.getElementById(txtAreas[i]).value = localStorage[txtAreas[i]];
+        }
     }
     
     for (var i=0;i<selBoxes.length;i++) {
+    if (localStorage[selBoxes[i]]=="undefined")
+    	{
+    	}
+    	else
+    	{
         selBoxes[i].children[selBoxes[i].selectedIndex].value = localStorage[selBoxes[i]];
+        }
     }
     
 }
