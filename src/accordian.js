@@ -3,10 +3,8 @@ $(document).ready(function() {
         active: false,
         collapsible: true
     });
-    $( "button" )
-    .button()
-    .click(function( event ) {
-        event.preventDefault();
-    });
     
+    $("button").click(function(ev) {
+	ev.preventDefault();
+    });    
 });

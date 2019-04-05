@@ -1,4 +1,4 @@
-    var txtInputs = [
+var txtInputs = [
     "pg2_duration",
     "pg2_stretcher_purpose",
     "pg3_neuro_comments",
@@ -16,8 +16,8 @@
     "pg5_ex_comments",
     "pg5_ex_restraints",
     "pg5_ex_skin_findings"
-    ];
-    var txtAreas = [
+];
+var txtAreas = [
     "pg2_chief_complaint",
     "pg2_hpi",
     "pg2_scene_description",
@@ -27,8 +27,8 @@
     "pg8_at_rec",
     "pg8_can_1",
     "pg8_can_2"
-    ];
-    var selBoxes = [
+];
+var selBoxes = [
     "pg2_duration_units",
     "pg2_als_assessment",
     "pg2_to_truck",
@@ -49,52 +49,97 @@
     "pg2_to_truck",
     "pg2_duration_units",
     "pg2_first_on_scene"
-    ];
+];
+
+function _all_opts() {
+    var opts = {};
+    for (var i=0; i<txtInputs.length; i++) {
+	opts[ txtInputs[i] ] = "text";
+    }
+    for (var i=0; i<txtAreas.length; i++) {
+	opts[ txtAreas[i] ] = "textarea";
+    }
+    for (var i=0; i<selBoxes.length; i++) {
+	opts[ selBoxes[i] ] = "select";
+    }
+    return opts;
+}
+
+function get_user_values() {
+    var vals = {};
+    var opts = _all_opts();
+    var keys = Object.keys(opts);
+    
+    for (var i=0; i < keys.length; i++) {
+	var field_id = keys[i];
+	var field_type = opts[field_id];
+	if (typeof(field_id) == "undefined" || field_id == "undefined") continue;
+	console.debug("Getting user value for: " + field_id + "(" + field_type + ")")
+
+	var el = document.getElementById(field_id);
+
+	if (field_type == "text" || field_type == "textarea") {
+	    vals[field_id] = el.value;
+	} else if (field_type == "select") {
+	    var ch = el.children[el.selectedIndex];
+	    if (typeof(ch) != "undefined") {
+		vals[field_id] = ch.value;
+	    }
+	} else {
+	    console.warn("Not sure what to do with field " + field_type + ":" + field_id)
+	}
+
+    }
+    return vals;
+}
 
 function save_options() {
-
-    for (var i=0;i<txtInputs.length;i++) {
-        localStorage[txtInputs[i]] = document.getElementById(txtInputs[i]).value;
-    }
-        
-    for (var i=0;i<txtAreas.length;i++) {
-        localStorage[txtAreas[i]] = document.getElementById(txtAreas[i]).value;
-    }
+    var values = get_user_values();
+    var keys = Object.keys(values);
+    console.info("Saving Values:");
+    console.info(values);
     
-    for (var i=0;i<selBoxes.length;i++) {
-	// localStorage[selBoxes[i]] = selBoxes[i].children[selBoxes[i].selectedIndex].value;
-        var j = document.getElementById(selBoxes[i]).selectedIndex;
-        localStorage[selBoxes[i]] = document.getElementById(selBoxes[i]).options[j].value;
-    }
-    
-    // Update status to let user know options were saved.
-    var status = document.getElementById("status");
-    status.innerHTML = "OPTIONS SAVED";
-    setTimeout(function() {
-        status.innerHTML = "";
-    }, 2000);
+    chrome.storage.sync.set(values, function() {
+	var status = document.getElementById("status");
+	status.innerHTML = "OPTIONS SAVED";
+	setTimeout(function() {
+            status.innerHTML = "";
+	}, 2000);
+    });
 }
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-    for (var i=0;i<txtInputs.length;i++) {
-    	if (localStorage[txtInputs[i]] != "undefined") {
-            document.getElementById(txtInputs[i]).value = localStorage[txtInputs[i]];
-        }
-    }
-    
-    for (var i=0;i<txtAreas.length;i++) {
-	if (localStorage[txtAreas[i]] != "undefined") {
-            document.getElementById(txtAreas[i]).value = localStorage[txtAreas[i]];
-        }
-    }
-    
-    for (var i=0;i<selBoxes.length;i++) {
-	if (localStorage[selBoxes[i]] != "undefined") {
-            selBoxes[i].children[selBoxes[i].selectedIndex].value = localStorage[selBoxes[i]];
-        }
-    }
-    
+    console.info("Restoring Options");
+    var vals = {};
+    var opts = _all_opts();
+    var opt_keys = Object.keys(opts);
+
+    chrome.storage.sync.get(opt_keys, function(items) {
+	for (var i=0; i<opt_keys.length; i++) {
+	    var field_id = opt_keys[i];
+	    var field_type = opts[field_id];
+	    var user_val = items[field_id];
+	    
+	    console.debug(field_id + ":" + field_type + " has value: " + user_val);
+		
+	    if (field_type == "text" || field_type == "textarea") {
+		document.getElementById(field_id).value = user_val;
+		    
+	    } else if (field_type == "select") {
+		var sbox = document.getElementById(field_id);
+		sbox.children[ sbox.selectedIndex ].value = user_val;
+		// This doesn't seem right
+		// something like: sbox.selectedIndex = sbox.children.indexOf(user_val);
+		
+	    } else {
+		console.warn("I don't know what to do with " + field_type + ":" + field_id);
+	    }
+	}
+    });
+
+    return vals;
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#save').addEventListener('click', save_options);
