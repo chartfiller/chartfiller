@@ -53,7 +53,6 @@
 
 function save_options() {
 
-    
     for (var i=0;i<txtInputs.length;i++) {
         localStorage[txtInputs[i]] = document.getElementById(txtInputs[i]).value;
     }
@@ -63,9 +62,9 @@ function save_options() {
     }
     
     for (var i=0;i<selBoxes.length;i++) {
-       // localStorage[selBoxes[i]] = selBoxes[i].children[selBoxes[i].selectedIndex].value;
-            var j = document.getElementById(selBoxes[i]).selectedIndex;
-            localStorage[selBoxes[i]] = document.getElementById(selBoxes[i]).options[j].value;
+	// localStorage[selBoxes[i]] = selBoxes[i].children[selBoxes[i].selectedIndex].value;
+        var j = document.getElementById(selBoxes[i]).selectedIndex;
+        localStorage[selBoxes[i]] = document.getElementById(selBoxes[i]).options[j].value;
     }
     
     // Update status to let user know options were saved.
@@ -78,35 +77,21 @@ function save_options() {
 
 // Restores select box state to saved value from localStorage.
 function restore_options() {
-
-    
     for (var i=0;i<txtInputs.length;i++) {
-    	if (localStorage[txtInputs[i]]=="undefined")
-    	{
-    	}
-    	else
-    	{
-        document.getElementById(txtInputs[i]).value = localStorage[txtInputs[i]];
+    	if (localStorage[txtInputs[i]] != "undefined") {
+            document.getElementById(txtInputs[i]).value = localStorage[txtInputs[i]];
         }
     }
     
     for (var i=0;i<txtAreas.length;i++) {
-    if (localStorage[txtAreas[i]]=="undefined")
-    	{
-    	}
-    	else
-    	{
-        document.getElementById(txtAreas[i]).value = localStorage[txtAreas[i]];
+	if (localStorage[txtAreas[i]] != "undefined") {
+            document.getElementById(txtAreas[i]).value = localStorage[txtAreas[i]];
         }
     }
     
     for (var i=0;i<selBoxes.length;i++) {
-    if (localStorage[selBoxes[i]]=="undefined")
-    	{
-    	}
-    	else
-    	{
-        selBoxes[i].children[selBoxes[i].selectedIndex].value = localStorage[selBoxes[i]];
+	if (localStorage[selBoxes[i]] != "undefined") {
+            selBoxes[i].children[selBoxes[i].selectedIndex].value = localStorage[selBoxes[i]];
         }
     }
     
