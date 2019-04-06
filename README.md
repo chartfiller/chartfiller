@@ -5,9 +5,10 @@ Chartfiller
 
 Chartfiller is a free extension for the Chrome browser which allows you to store defaults for emscharts.com patient care reports.
 
+
 ## User Installation
 
-  1. Install via the [Chrome Web Store](http://bit.ly/1b5U0ZU)
+[![Chrome Web Store](img/webstore.png "Click here to visit the install page")(http://bit.ly/1b5U0ZU)
 
 
 ## Install from Source (Advanced)
