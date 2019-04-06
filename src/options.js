@@ -97,7 +97,7 @@ function save_options() {
     var values = get_user_values();
     var keys = Object.keys(values);
     console.info("Saving Values:");
-    console.info(values);
+    console.debug(values);
     
     chrome.storage.sync.set(values, function() {
 	var status = document.getElementById("status");
@@ -108,7 +108,6 @@ function save_options() {
     });
 }
 
-// Restores select box state to saved value from localStorage.
 function restore_options() {
     console.info("Restoring Options");
     var vals = {};
@@ -116,22 +115,28 @@ function restore_options() {
     var opt_keys = Object.keys(opts);
 
     chrome.storage.sync.get(opt_keys, function(items) {
+	console.debug(items);
 	for (var i=0; i<opt_keys.length; i++) {
 	    var field_id = opt_keys[i];
 	    var field_type = opts[field_id];
 	    var user_val = items[field_id];
-	    
-	    console.debug(field_id + ":" + field_type + " has value: " + user_val);
-		
+
+	    if (typeof(user_val) == "undefined" && localStorage.hasOwnProperty(field_id)) {
+		user_val = localStorage[field_id];
+		console.debug("Got value for '" + field_id + "' from localStorage");
+	    }
+
 	    if (field_type == "text" || field_type == "textarea") {
 		document.getElementById(field_id).value = user_val;
 		    
 	    } else if (field_type == "select") {
 		var sbox = document.getElementById(field_id);
-		sbox.children[ sbox.selectedIndex ].value = user_val;
-		// This doesn't seem right
-		// something like: sbox.selectedIndex = sbox.children.indexOf(user_val);
-		
+		for (var j=0; j<sbox.children.length;j++) {
+		    if (sbox.children[j].value == user_val) {
+			sbox.selectedIndex = j;
+			break;
+		    }
+		}
 	    } else {
 		console.warn("I don't know what to do with " + field_type + ":" + field_id);
 	    }
