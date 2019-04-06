@@ -1,0 +1,274 @@
+---
+fields:
+  - name: Chief Complaint
+    type: textarea
+    id: pg2_chief_complaint
+    default: |
+      Arrived on scene to find a/n ______ complaining of ___.
+
+  - name: ALS Assessment
+    type: select
+    id: pg2_als_assessment
+    options:
+      1: Not Completed
+      2: Completed for Suspected Illness
+      3: Completed for Rule-Out Diagnosis
+
+  - name: Duration
+    type: text
+    id: pg2_duration
+    default: 1
+
+  - name: Duration Units
+    type: select
+    id: pg2_duration_units
+    options:
+      1235: Seconds
+      1240: Minutes
+      1245: Hours
+      1250: Days
+      1255: Weeks
+      1260: Months
+      1265: Years
+
+  - name: HPI
+    type: textarea
+    id: pg2_hpi
+    default: |
+      <HPI goes here>
+
+  - name: Scene Description
+    type: textarea
+    id: pg2_scene_description
+
+  - name: First Agency Unit On Scene?
+    type: select
+    id: pg2_first_on_scene
+    options:
+      "-25": Not Applicable
+      "-20": Not Recorded
+      "0": No
+      "1": Yes
+
+  - name: Patient Belongings
+    type: textarea
+    id: pg2_belongings
+
+  - name: To ambulance via
+    type: select
+    id: pg2_to_truck
+    options:
+      4880: Stretcher
+      4865: Assist/Walk
+      4885: Other
+
+  - name: Position in Ambulance
+    type: select
+    id: pg2_position
+    options:
+      4910: Semi-Fowlers
+      4895: Fowlers
+      4915: Sitting
+      4920: Supine
+
+  - name: From ambulance via
+    type: select
+    id: pg2_from_truck
+    options:
+      4930: Assist/Walk
+      4935: Stretcher
+      4951: Wheelchair
+
+  - name: Stretcher Purpose
+    type: text
+    id: pg2_stretcher_purpose
+
+###############################
+## Page 3
+
+  - name: Neuro Comments
+    type: text
+    id: pg3_neuro_comments
+
+  - name: Stroke Scale
+    type: select
+    id: pg3_stroke_scale
+    options:
+      _25: "Not Applicable"
+      3275: "Cincinnati Negative"
+      3280: "Cincinnati Inconclusive"
+      3285: "Cincinnati Positive"
+
+  - name: GCS Eye
+    type: select
+    id: pg3_gcs_eye
+    options:
+      4: 4 - Spontaneous
+      _: <None>
+
+  - name: GCS Verbal
+    type: select
+    id: pg3_gcs_verbal
+    options:
+      5: 5 - Oriented
+      _: <None>
+
+  - name: GCS Motor
+    type: select
+    id: pg3_gcs_motor
+    options:
+      6: 6 - Obeys Commands
+      _: <None>
+
+###############################
+## Page 4
+
+  - name: Respiratory Comments
+    type: text
+    id: pg4_resp_comments
+
+  - name: Cardiovascular Comments
+    type: text
+    id: pg4_cardiac_comments
+
+  - name: Radial (Left)
+    type: select
+    id: pg4_radial_l
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Radial (Right)
+    type: select
+    id: pg4_radial_r
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Femoral (Left)
+    type: select
+    id: pg4_fem_l
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Femoral (Right)
+    type: select
+    id: pg4_fem_r
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Carotid (Left)
+    type: select
+    id: pg4_carotid_l
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Carotid (Right)
+    type: select
+    id: pg4_carotid_r
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Dorsalis (Left)
+    type: select
+    id: pg4_dors_l
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+  - name: Dorsalis (Right)
+    type: select
+    id: pg4_dors_r
+    options:
+      1: Strong
+      22: Normal
+      4: Not Checked
+      _: <None>
+
+###############################
+## Page 5
+
+  - name: Head Findings
+    type: text
+    id: pg5_head_comments
+
+  - name: Neck Findings
+    type: text
+    id: pg5_neck_comments
+
+  - name: Chest Findings
+    type: text
+    id: pg5_chest_comments
+
+  - name: Abdomen (Appearance)
+    type: text
+    id: pg5_ap_appearance
+
+  - name: Abdomen (Palpation)
+    type: text
+    id: pg5_ap_palpation
+
+  - name: Abdomen (Bowel Sounds)
+    type: text
+    id: pg5_ap_bowel_sounds
+
+  - name: Abdomen (Comments)
+    type: text
+    id: pg5_ap_findings
+
+  - name: Pelvis Findings
+    type: text
+    id: pg5_pelvis_comments
+
+  - name: Back Findings
+    type: text
+    id: pg5_back_comments
+
+  - name: Extremity Findings
+    type: text
+    id: pg5_ex_comments
+
+  - name: Restraints
+    type: text
+    id: pg5_ex_restraints
+
+  - name: Skin Findings
+    type: text
+    id: pg5_ex_skin_findings
+
+###############################
+## Page 8
+
+  - name: "'On Scene' Comment"
+    type: textarea
+    id: pg8_at_ref
+
+  - name: "'Transporting' Comment"
+    type: textarea
+    id: pg8_lv_ref
+
+  - name: "'At Hospital' Comment"
+    type: textarea
+    id: pg8_at_rec
+
+
+    
+    
