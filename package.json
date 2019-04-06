@@ -1,0 +1,9 @@
+{
+    "devDependencies": {
+	"chrome-webstore-upload-cli": "^1.0.0"
+    },
+    "scripts": {
+	"test": "echo 'no tests'",
+	"release": "webstore upload --source=src --auto-publish"
+    }
+}
