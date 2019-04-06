@@ -1,10 +1,23 @@
 .DEFAULT_GOAL:=help
 .PHONY:
+PROJECT_NAME = chartfiller
+PWD=$(shell pwd)
+BUILD_DIR=$(PWD)/build
+SRC_DIR=$(PWD)/src
+PROJECT_VERSION=$(shell cat $(SRC_DIR)/manifest.json | jq -r .version)
 
+ZIPFILE=$(BUILD_DIR)/$(PROJECT_NAME)-$(PROJECT_VERSION).zip
+
+.PHONY: clean
+clean:
+	@rm -rf $(BUILD_DIR)
+	@find . -name '*~' -delete
+	@find . -name '*#' -delete
 
 .PHONY: build
 build:
-	@echo building
+	mkdir -p $(BUILD_DIR)
+	cd $(SRC_DIR) && zip $(ZIPFILE) *
 
 .PHONY: help
 help: ## Display this message
