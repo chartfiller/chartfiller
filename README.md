@@ -8,7 +8,7 @@ Chartfiller is a free extension for the Chrome browser which allows you to store
 
 ## User Installation
 
-[![Chrome Web Store](img/webstore.png "Click here to visit the install page")(http://bit.ly/1b5U0ZU)
+[![Chrome Web Store](img/webstore.png "Click here to visit the install page")(http://bit.ly/1b5U0ZU)]
 
 
 ## Install from Source (Advanced)
