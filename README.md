@@ -1,21 +1,29 @@
-### Chartfiller
+Chartfiller
+===========
 
-Chartfiller is a free extension for the Chrome browser which allows you to store defaults for emscharts.com patient care reports. To install the extension, visit the [Chrome Web Store](http://bit.ly/1b5U0ZU).
+[![Build Status](https://travis-ci.org/cmattoon/chartfiller.svg?branch=master)](https://travis-ci.org/cmattoon/chartfiller)
 
-#### Installing from Source (Developers)
-To install the package from source, you'll first need to download the code (see right), or fork the repo on GitHub.
+Chartfiller is a free extension for the Chrome browser which allows you to store defaults for emscharts.com patient care reports.
 
-To fork the repo, run the following command (must have `git` installed).
+## User Installation
 
-`git clone https://github.com/cmattoon/chartfiller.git`
-
-Next, visit `chrome://extensions/` in your browser, and put Chrome into Developer Mode.
-
-Finally, select `Load Unpacked Extension` and browse to the location of the `src` folder in your repository and click OK. Chrome should import the package.
-
-While developing, you will need to press `Ctrl+R` in the `chrome://extensions/` tab to reload the extension.
+  1. Install via the [Chrome Web Store](http://bit.ly/1b5U0ZU)
 
 
-#### Contributing
+## Install from Source (Advanced)
 
-Feel free to submit pull requests for existing issues or new features. 
+
+  1. `git clone git@github.com/cmattoon/chartfiller.git`
+  2. Open `chrome://extensions/` in your browser
+  3. Enable `Developer Mode` in the upper-right corner
+  4. Select `Load Unpacked Extension` in the upper-left corner
+  5. Find the `chartfiller` folder from the `git clone` step, and `Open` the `src` directory
+
+
+## Conributing
+
+  Please report any issues by using the "Issues" tab above.
+
+  I'm no longer active in EMS and don't have access to continue to support/test/debug
+  certain issues. If you're interested in maintaining/contributing/testing, email me
+  at `chartfiller@cmattoon.com`
