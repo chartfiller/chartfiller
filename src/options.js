@@ -1,3 +1,9 @@
+/**
+ * options.js
+ *
+ * This content script handles the settings page at /options.html
+ *
+ */
 var txtInputs = [
     "pg2_duration",
     "pg2_stretcher_purpose",
@@ -51,6 +57,15 @@ var selBoxes = [
     "pg2_first_on_scene"
 ];
 
+/**
+ * Returns a dict/object of "input element ID" => "input type"
+ * for the above items (txtInputs, txtAreas, selBoxes).
+ *
+ * This mapping is required to call the type-dependent
+ * getter/setter functions.
+ * 
+ * @return object
+ */
 function _all_opts() {
     var opts = {};
     for (var i=0; i<txtInputs.length; i++) {
@@ -65,6 +80,12 @@ function _all_opts() {
     return opts;
 }
 
+/**
+ * Uses the input mapping (above) to extract user-defined values
+ * from the inputs on the options page.
+ *
+ * @return object
+ */
 function get_user_values() {
     var vals = {};
     var opts = _all_opts();
@@ -101,50 +122,67 @@ function save_options() {
     
     chrome.storage.sync.set(values, function() {
 	var status = document.getElementById("status");
-	status.innerHTML = "OPTIONS SAVED";
+	status.innerHTML = "OPTIONS SAVED (chrome.storage.sync)";
 	setTimeout(function() {
             status.innerHTML = "";
 	}, 2000);
     });
 }
 
+/**
+ * Restore Options is called when the page is loaded and 
+ * populates the options screen with the values from storage.
+ *
+ * 2022-01-30: Treat the string "undefined" as ""
+ */
 function restore_options() {
     console.info("Restoring Options");
     var vals = {};
     var opts = _all_opts();
     var opt_keys = Object.keys(opts);
 
+    console.debug("Getting options from chrome.storage.sync...");
+    console.debug(opt_keys);
+    console.log(opts);
+
     chrome.storage.sync.get(opt_keys, function(items) {
-	console.debug(items);
-	for (var i=0; i<opt_keys.length; i++) {
-	    var field_id = opt_keys[i];
-	    var field_type = opts[field_id];
-	    var user_val = items[field_id];
+	console.log('Got items from storage.sync:', items);
 
-	    if (typeof(user_val) == "undefined" && localStorage.hasOwnProperty(field_id)) {
-		user_val = localStorage[field_id];
-		console.debug("Got value for '" + field_id + "' from localStorage");
-	    }
+	opt_keys.forEach((key, i) => {
+	    const fieldType = opts[key];
+	    const userValue = (items[key] === "undefined") ? "" : items[key];
+	    
+	    switch (fieldType) {
+	    case 'text':
+	    case 'textarea':
+		vals[key] = userValue;
+		
+		document.getElementById(key).value = userValue;
+		break;
 
-	    if (field_type == "text" || field_type == "textarea") {
-		document.getElementById(field_id).value = user_val;
-		    
-	    } else if (field_type == "select") {
-		var sbox = document.getElementById(field_id);
+	    case 'select':
+		vals[key] = userValue;
+		
+		var sbox = document.getElementById(key);
 		for (var j=0; j<sbox.children.length;j++) {
-		    if (sbox.children[j].value == user_val) {
+		    if (sbox.children[j].value == userValue) {
 			sbox.selectedIndex = j;
 			break;
 		    }
 		}
-	    } else {
-		console.warn("I don't know what to do with " + field_type + ":" + field_id);
+		break;
+
+	    default:
+		console.warn("Invalid field type: ", opts[key]);
 	    }
-	}
+	});
     });
 
-    return vals;
+    return vals; // not sure what this was supposed to return
 }
 
+/**
+ * Script execution begins here 
+ */
 document.addEventListener('DOMContentLoaded', restore_options);
 document.querySelector('#save').addEventListener('click', save_options);
