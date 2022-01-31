@@ -1,64 +1,142 @@
-chrome.extension.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.greeting == "pg2") 
-            sendResponse({
-                chief_complaint : localStorage["pg2_chief_complaint"],
-                cc_duration : localStorage["pg2_duration"],
-                als_assessment : localStorage["pg2_als_assessment"],
-                cc_duration_units : localStorage["pg2_duration_units"],
-                hpi : localStorage["pg2_hpi"],
-                scene_description : localStorage["pg2_scene_description"],
-                patient_belongings : localStorage["pg2_belongings"],
-                to_truck : localStorage["pg2_to_truck"],
-                from_truck : localStorage["pg2_from_truck"],
-                position : localStorage["pg2_position"],
-                first_on_scene : localStorage["pg2_first_on_scene"],
-                stretcher_purpose : localStorage["pg2_stretcher_purpose"]
-            });
-        else if(request.greeting == "pg3")
-            sendResponse({
-                neuro_comments : localStorage["pg3_neuro_comments"],
-                stroke_scale : localStorage["pg3_stroke_scale"],
-                gcs_eye : localStorage["pg3_gcs_eye"],
-                gcs_verbal : localStorage["pg3_gcs_verbal"],
-                gcs_motor : localStorage["pg3_gcs_motor"]
-            });
-        else if (request.greeting == "pg4")
-            sendResponse({
-                resp_comments : localStorage["pg4_resp_comments"],
-                cardiac_comments : localStorage["pg4_cardiac_comments"],
-                carotid_r : localStorage["pg4_carotid_r"],
-                carotid_l : localStorage["pg4_carotid_r"],
-                radial_r : localStorage["pg4_radial_r"],
-                radial_l : localStorage["pg4_radial_l"],
-                fem_r : localStorage["pg4_fem_r"],
-                fem_l : localStorage["pg4_fem_l"],
-                dors_r : localStorage["pg4_dors_r"],
-                dors_l : localStorage["pg4_dors_l"]
-            });
-        else if (request.greeting == "pg5")
-            sendResponse({
-                head_comments : localStorage["pg5_head_comments"],
-                neck_comments : localStorage["pg5_neck_comments"],
-                chest_comments : localStorage["pg5_chest_comments"],
-                ap_appearance : localStorage["pg5_ap_appearance"],
-                ap_palpation : localStorage["pg5_ap_palpation"],
-                ap_bowel_sounds : localStorage["pg5_ap_bowel_sounds"],
-                ap_findings : localStorage["pg5_ap_findings"],
-                trachea : 'M',
-                pelvis_comments : localStorage["pg5_pelvis_comments"],
-                back_comments : localStorage["pg5_back_comments"],
-                extremity_findings : localStorage["pg5_ex_comments"],
-                restraints : localStorage["pg5_ex_restraints"],
-                skin_findings : localStorage["pg5_ex_skin_findings"]
-            });
-        else if (request.greeting == "pg8")
-            sendResponse({
-                at_ref_comment : localStorage["pg8_at_ref"],
-                lv_ref_comment : localStorage["pg8_lv_ref"],
-                at_rec_comment : localStorage["pg8_at_rec"],
-                can_1 : localStorage["pg8_can_1"],
-                can_2 : localStorage["pg8_can_2"]
-            });
-            
-    });
+/**
+ * This is the Background Page, which runs in the background and waits for requests.
+ * Individual content scripts request specific bits of information depending on the page.
+ * 
+ * Input lists and _get_opts are copied from options.js
+ */
+var txtInputs = [
+    "pg2_duration",
+    "pg2_stretcher_purpose",
+    "pg3_neuro_comments",
+    "pg4_resp_comments",
+    "pg4_cardiac_comments",
+    "pg5_head_comments",
+    "pg5_neck_comments",
+    "pg5_chest_comments",
+    "pg5_ap_appearance",
+    "pg5_ap_palpation",
+    "pg5_ap_bowel_sounds",
+    "pg5_ap_findings",
+    "pg5_pelvis_comments",
+    "pg5_back_comments",
+    "pg5_ex_comments",
+    "pg5_ex_restraints",
+    "pg5_ex_skin_findings"
+];
+var txtAreas = [
+    "pg2_chief_complaint",
+    "pg2_hpi",
+    "pg2_scene_description",
+    "pg2_belongings",
+    "pg8_at_ref",
+    "pg8_lv_ref",
+    "pg8_at_rec",
+    "pg8_can_1",
+    "pg8_can_2"
+];
+var selBoxes = [
+    "pg2_duration_units",
+    "pg2_als_assessment",
+    "pg2_to_truck",
+    "pg2_position",
+    "pg2_from_truck",
+    "pg3_stroke_scale",
+    "pg3_gcs_eye",
+    "pg3_gcs_verbal",
+    "pg3_gcs_verbal",
+    "pg4_radial_l",
+    "pg4_radial_r",
+    "pg4_fem_l",
+    "pg4_fem_r",
+    "pg4_carotid_l",
+    "pg4_carotid_r",
+    "pg4_dors_l",
+    "pg4_dors_r",
+    "pg2_to_truck",
+    "pg2_duration_units",
+    "pg2_first_on_scene"
+];
+
+// _all_opts works as a getter to prevent modifying a global object.
+function _all_opts() {
+    var opts = {};
+    for (var i=0; i<txtInputs.length; i++) {
+	opts[ txtInputs[i] ] = "text";
+    }
+    for (var i=0; i<txtAreas.length; i++) {
+	opts[ txtAreas[i] ] = "textarea";
+    }
+    for (var i=0; i<selBoxes.length; i++) {
+	opts[ selBoxes[i] ] = "select";
+    }
+    return opts;
+}
+
+/**
+ * This listener responds to 'sendMessage' from the content script.
+ */
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+    const { pageName } = request;
+    console.log("got message: ", pageName);
+
+    var keys;
+    
+    switch (pageName) {
+    case 'create.cfm':
+	sendResponse({ error: false, data: {} });
+	break;
+
+    case 'page2.cfm':
+	keys = Object.keys(_all_opts()).filter((k) => k.startsWith('pg2_'));
+	chrome.storage.sync.get(keys, function(data) {
+	    sendResponse({
+		error: false,
+		data: data,
+	    });
+	});
+	return true;
+
+    case 'page3.cfm':
+	keys = Object.keys(_all_opts()).filter((k) => k.startsWith('pg2_'));
+	chrome.storage.sync.get(keys, function(data) {
+	    sendResponse({
+		error: false,
+		data: data,
+	    });
+	});
+	return true;
+
+    case 'page4.cfm':
+	keys = Object.keys(_all_opts()).filter((k) => k.startsWith('pg4_'));
+	chrome.storage.sync.get(keys, function(data) {
+	    sendResponse({
+		error: false,
+		data: data,
+	    });
+	});
+	return true;
+	
+    case 'page5.cfm':
+	keys = Object.keys(_all_opts()).filter((k) => k.startsWith('pg5_'));
+	chrome.storage.sync.get(keys, function(data) {
+	    sendResponse({
+		error: false,
+		data: data,
+	    });
+	});
+	return true;
+    case 'page8.cfm':
+	keys = Object.keys(_all_opts()).filter((k) => k.startsWith('pg8_'));
+	chrome.storage.sync.get(keys, function(data) {
+	    sendResponse({
+		error: false,
+		data: data,
+	    });
+	});
+	return true;
+	
+    default:
+	sendResponse({ error: 'Unknown or invalid page', data: {} });
+	return true;
+    }
+});

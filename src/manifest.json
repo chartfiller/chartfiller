@@ -20,32 +20,14 @@
     ],
     "web_accessible_resources":["inject.js"],
     "content_scripts": [
-    {
-        "matches":["https://www.emscharts.com/pr/page2.cfm?*"],
-        "js":["jquery-1.8.3.min.js","page2.js"],
-        "run_at":"document_start"
-    },
-    {
-        "matches":["https://www.emscharts.com/pr/page3.cfm?*"],
-        "js":["jquery-1.8.3.min.js","page3.js"],
-        "run_at":"document_start"
-    },
-    {
-        "matches":["https://www.emscharts.com/pr/page4.cfm?*"],
-        "js":["jquery-1.8.3.min.js","page4.js"],
-        "run_at":"document_start"
-    },
-    {
-        "matches":["https://www.emscharts.com/pr/page5.cfm?*"],
-        "js":["jquery-1.8.3.min.js","page5.js"],
-        "run_at":"document_start"
-    },
-    {
-        "matches":["https://www.emscharts.com/pr/page8.cfm?*"],
-        "js":["jquery-1.8.3.min.js","page8.js"],
-        "run_at":"document_start"
-    }
-
+	{
+            "matches":[
+		"https://www.emscharts.com/specrep/create.cfm*",
+		"https://www.emscharts.com/pr/page*.cfm*"
+	    ],
+            "js":["jquery-1.8.3.min.js","specrep.js"],
+            "run_at":"document_start"
+	}
     ],
     "browser_action": {
         "default_title": "EMSCharts Filler",
